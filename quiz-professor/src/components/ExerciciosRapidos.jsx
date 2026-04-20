@@ -3,8 +3,7 @@ import { adicionarXP } from '../services/db';
 
 const questoes = [
   { pergunta: "Assinale a opção em que o termo destacado é adjunto adverbial de modo:", alternativas: ["Ele fala *alto*", "Chegou *ontem*", "Mora *perto*", "Estudou *para a prova*"], correta: 0 },
-  { pergunta: "Indica circunstância de lugar:", alternativas: ["Ele dormiu *pouco*", "Saia *daqui*", "Falou *baixo*", "Correu *muito*"], correta: 1 },
-  { pergunta: "Em 'Falou *baixo*', o adjunto adverbial é de:", alternativas: ["Tempo", "Lugar", "Modo", "Intensidade"], correta: 2 },
+  { pergunta: "Indica circunstância de lugar:", alternativas: ["Ele dormiu *pouco*", "Saia *daqui*", "Falou *baixo*", "Correu *muito*"], correta: 1 }
 ];
 
 export default function ExerciciosRapidos({ alunoNome, turma }) {
@@ -36,22 +35,17 @@ export default function ExerciciosRapidos({ alunoNome, turma }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-serif font-bold text-gray-800 mb-4">✍️ Exercícios Rápidos</h2>
-      <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
-        <p className="font-medium mb-4 text-sm sm:text-base">{q.pergunta}</p>
+      <h2 className="text-2xl font-serif font-bold text-gray-800 dark:text-gray-100 mb-4">✍️ Exercícios Rápidos</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <p className="font-medium mb-4 text-gray-800 dark:text-gray-200">{q.pergunta}</p>
         <div className="space-y-2">
           {q.alternativas.map((alt, i) => (
-            <button
-              key={i}
-              onClick={() => handleResposta(i)}
-              disabled={respondeu}
-              className="w-full text-left p-2 border rounded hover:bg-gray-100 disabled:opacity-50 text-sm sm:text-base"
-            >
+            <button key={i} onClick={() => handleResposta(i)} disabled={respondeu} className="w-full text-left p-2 border rounded hover:bg-gray-100 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700 disabled:opacity-50">
               {alt}
             </button>
           ))}
         </div>
-        {msg && <p className="mt-4 text-center font-semibold text-sm sm:text-base">{msg}</p>}
+        {msg && <p className="mt-4 text-center font-semibold text-gray-700 dark:text-gray-300">{msg}</p>}
       </div>
     </div>
   );

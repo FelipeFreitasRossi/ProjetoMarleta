@@ -1,16 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 
 export default function ConfiguracoesContent({ alunoNome, turma, onUpdate }) {
   const { darkMode, toggleTheme } = useTheme();
   const [novoNome, setNovoNome] = useState(alunoNome);
   const [novaTurma, setNovaTurma] = useState(turma);
+  const [mensagem, setMensagem] = useState('');
 
   const handleSalvar = () => {
     sessionStorage.setItem('alunoNome', novoNome);
     sessionStorage.setItem('alunoTurma', novaTurma);
     if (onUpdate) onUpdate(novoNome, novaTurma);
-    alert('Dados atualizados!');
+    
+    // Feedback visual discreto (opcional)
+    setMensagem('✅ Dados salvos com sucesso!');
+    setTimeout(() => setMensagem(''), 2000);
   };
 
   return (
@@ -49,7 +53,12 @@ export default function ConfiguracoesContent({ alunoNome, turma, onUpdate }) {
           </div>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Ative o modo escuro para estudar à noite com mais conforto.</p>
         </div>
-        <button onClick={handleSalvar} className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">Salvar alterações</button>
+        <button onClick={handleSalvar} className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">
+          Salvar alterações
+        </button>
+        {mensagem && (
+          <p className="text-sm text-green-600 dark:text-green-400 text-center">{mensagem}</p>
+        )}
       </div>
     </div>
   );
